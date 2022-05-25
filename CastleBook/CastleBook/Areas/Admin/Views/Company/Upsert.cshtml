@@ -1,0 +1,70 @@
+﻿@model Company
+
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <input asp-for="Id"  hidden />
+	
+    <div class="row">
+        <div class="col-10">
+            <div class="border-info p-3 mt-4 row">
+                <div class="row pt-2">
+                    <h2 class ="text-info">@(Model.Id!=0?"Update":"Create") Company</h2>
+                </div>
+     
+            <div class="form-group mb-3">
+                  <label asp-for="Name"for="exampleInputEmail1" class="form-label mt-4"></label>
+                   <input asp-for="Name"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" >
+                   <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+             <div class="form-group mb-3">
+                 <label asp-for="Address"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <textarea asp-for="Address"  class="form-control" row="3"id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Description" ></textarea>
+                 <span asp-validation-for="Address" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="City"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="City"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" >
+                 <span asp-validation-for="City" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="State"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="State"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="State" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="PostalCode"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="PostalCode"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="PostalCode" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3  col-6">
+                 <label asp-for="PhoneNumber"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="PhoneNumber"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+             </div>
+             
+             </div>
+             <div class=col-12>
+                 @if (Model.Id != 0)
+                {
+                    <button  type="submit" class="btn btn-outline-primary" style="width: 150px">Update</button>
+                }
+                else
+                {
+                    <button  type="submit" class="btn btn-outline-primary" style="width: 150px">Create</button>
+                }
+        
+                <a  asp-controller="Company" asp-action="Index" class="btn btn-outline-info" style ="width 150px">Back To List</a>
+    
+             </div>
+        </div>
+     </div>
+     
+</form>
+@section Scripts{
+    @{
+         <partial name="_ValidationScriptsPartial" />
+
+    }
+
+    
+}

@@ -1,0 +1,22 @@
+﻿
+@model CoverType
+
+<form method="post">
+     <div class="border-info p-3 mt-4">
+         <div class="row pt-2">
+             <h2 class ="text-info">Edit CoverType</h2>
+         </div>
+     </div>
+     <div class="form-group mb-3">
+         <label asp-for="Name"for="exampleInputEmail1" class="form-label mt-4"></label>
+         <input asp-for="Name"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" >
+         <span asp-validation-for="Name" class="text-danger"></span>
+     </div>
+
+     <button  type="submit" class="btn btn-outline-primary" style="width: 150px">Edit</button>
+     <a  asp-controller="CoverType" asp-action="Index" class="btn btn-outline-info" style ="width 150px">Back To List</a>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}

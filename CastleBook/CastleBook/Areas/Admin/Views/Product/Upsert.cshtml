@@ -1,0 +1,121 @@
+﻿@model CastleBook.Models.ViewModels.ProductVM
+
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <input asp-for="product.Id"  hidden />
+	<input asp-for="product.ImageUrl" hidden />
+    <div class="row">
+        <div class="col-10">
+            <div class="border-info p-3 mt-4 row">
+                <div class="row pt-2">
+                    <h2 class ="text-info">@(Model.product.Id!=0?"Update":"Create") Product</h2>
+                </div>
+     
+            <div class="form-group mb-3">
+                  <label asp-for="product.Title"for="exampleInputEmail1" class="form-label mt-4"></label>
+                   <input asp-for="product.Title"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" >
+                   <span asp-validation-for="product.Title" class="text-danger"></span>
+            </div>
+             <div class="form-group mb-3">
+                 <label asp-for="product.Description"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <textarea asp-for="product.Description"  class="form-control" row="3"id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Description" ></textarea>
+                 <span asp-validation-for="product.Description" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.Author"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="product.Author"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" >
+                 <span asp-validation-for="product.Author" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.ISBN"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="product.ISBN"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="product.ISBN" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.Listprice"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="product.Listprice"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="product.Listprice" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3  col-6">
+                 <label asp-for="product.Price"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="product.Price"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="product.Price" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.Price100"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="product.Price100"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="product.Price100" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.Price50"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input asp-for="product.Price50"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                 <span asp-validation-for="product.Price50" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3">
+                 <label asp-for="product.ImageUrl"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <input type ="file" class="form-control" id="uploadBox" name="file" aria-describedby="emailHelp" placeholder="Enter Value" >
+         
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.CategoryId"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <select asp-for="product.CategoryId" asp-items="@Model.CategoryList" class="form-select" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                    <option disabled selected>--Select Category--</option>
+                 </select>
+                     <span asp-validation-for="product.CategoryId" class="text-danger"></span>
+             </div>
+             <div class="form-group mb-3 col-6">
+                 <label asp-for="product.CoverTypeId"for="exampleInputEmail1" class="form-label mt-4"></label>
+                 <select asp-for="product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Value" >
+                    <option disabled selected>--Select Category--</option>
+                 </select>
+                     <span asp-validation-for="product.CoverTypeId" class="text-danger"></span>
+             </div>
+             </div>
+             <div class=col-12>
+                 @if (Model.product.Id != 0)
+                {
+                    <button  type="submit" class="btn btn-outline-primary" style="width: 150px">Update</button>
+                }
+                else
+                {
+                    <button  type="submit" onclick ="return ValidateInput()"class="btn btn-outline-primary" style="width: 150px">Create</button>
+                }
+        
+                <a  asp-controller="Product" asp-action="Index" class="btn btn-outline-info" style ="width 150px">Back To List</a>
+    
+             </div>
+        </div>
+        <div class="col-2">
+            <img src="@Model.product.ImageUrl" width="100%" style="border-radius:5px; border:2px solid #bbb9b9" />
+        </div>
+     </div>
+     
+</form>
+@section Scripts{
+    @{
+         <partial name="_ValidationScriptsPartial" />
+
+    }
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+        function ValidateInput(){
+            if(document.getElementById("uploadBox").value==""){
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Please Upload an Image!',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
